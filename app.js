@@ -22,7 +22,7 @@ app.use(express.json());
 
 // routes
 
-app.use("/api/v1/auth", authenticateUser, AuthRouter);
+app.use("/api/v1/auth", AuthRouter);
 app.use("/api/v1/jobs", authenticateUser, JobsRouter);
 
 app.use(notFoundMiddleware);
