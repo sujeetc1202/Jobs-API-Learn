@@ -15,7 +15,6 @@ const errorHandlerMiddleware = (err, req, res, next) => {
   // }
 
   // Validation error code
-
   if (err.name === "ValidationError") {
     customError.msg = Object.values(err.errors)
       .map((item) => item.message)
@@ -29,6 +28,13 @@ const errorHandlerMiddleware = (err, req, res, next) => {
       err.keyValue
     )} field. please choose another value`;
     customError.statusCode = 400;
+  }
+
+  // Cast Error
+
+  if (err.name === "CastError") {
+    customError.msg = `No item found with id : ${err.value}`;
+    customError.statusCode = 404;
   }
 
   // return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({ err });
